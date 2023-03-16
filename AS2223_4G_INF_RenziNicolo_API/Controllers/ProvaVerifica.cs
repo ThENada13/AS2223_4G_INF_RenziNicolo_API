@@ -1,26 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AS2223_4G_INF_RenziNicolo_API.Controllers
 {
+    [Authorize]
+    [ApiController]
+    [Route("[controller]")]
     public class ProvaVerifica : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+      
 
-        [HttpGet(Name = "GetNumber")]
-        public JsonResult Get(int numero)
+        [HttpGet(Name = "GetFattoriale")]
+        public JsonResult GetFattoriale(int fattoriale)
         {
-            numero = numero % 2;
-            if (numero == 0)
+            int res = 1;
+            for (int i = 0; i > fattoriale; i++)
             {
-                return Json(new { status = "OK", message = "è pari"});
+                res = res * fattoriale - i;
             }
-            else
-            {
-                return Json(new { status = "OK", message = "è dispari" });
-            }
+            return Json(new { output = res ,status = "OK", });
         }
     }
 }
