@@ -8,7 +8,19 @@ namespace AS2223_4G_INF_RenziNicolo_API.Controllers
     [Route("[controller]")]
     public class ProvaVerifica : Controller
     {
-      
+        [HttpGet(Name = "GetPariDispari")]
+        public JsonResult GetPariDispari(int numero)
+        {
+            numero = numero % 2;
+            if (numero == 0)
+            {
+                return Json(new { status = "OK", message = "è pari" });
+            }
+            else
+            {
+                return Json(new { status = "OK", message = "è dispari" });
+            }
+        }
 
         [HttpGet(Name = "GetFattoriale")]
         public JsonResult GetFattoriale(int fattoriale)
